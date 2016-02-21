@@ -51,16 +51,16 @@ You can configure the module by adding additional parameters to the config file 
 
 - admins:
 	- this is an array usernames, that can access this module
-	- default: []
+	- default: `[]`
 - migrationPath:
 	- path of the migration files
-	- default: '@vendor/barney-k/yii2-migration-module/migrations'
+	- default: `'@vendor/barney-k/yii2-migration-module/migrations'`
 - dateFormat:
 	- php date format string for displaying the create and apply dates.
-	- default: 'Y.m.d. H:i:s'
+	- default: `'Y.m.d. H:i:s'`
 - migrationTable:
 	- name of the database table for the migrations
-	- default: 'migration'
+	- default: `'migration'`
 
 Example:
 --------
