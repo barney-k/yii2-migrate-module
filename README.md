@@ -82,3 +82,26 @@ Example:
 ],
 ...
 ```
+
+Usage:
+======
+
+- Create a new migration file
+- Open up the generated file from the **migrationPath**
+- Write your migration code. [Guide about migrations](http://www.yiiframework.com/doc-2.0/guide-db-migrations.html)
+- Save the file
+- Click on the migration's name in the migration list
+- You can see the interactions that you can do with that migration under the details table
+
+Features:
+=========
+
+- Generates migration files without CLI
+- Indicates that if it's already applied or not
+- Applies only one migration
+- Applies more migrations up to a specific one
+- Marks a migration as done
+- Marks a migration as undone
+- Redos a specific migration
+- Reverts a specific migration
+- Displays messages from the migration process just like the CLI would
