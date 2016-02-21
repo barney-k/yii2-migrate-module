@@ -1,10 +1,20 @@
 <?php
+
+/**
+ * @package   yii2-migration-module
+ * @author    Barney K <info@barney-k.com>
+ * @version   1.0.0
+ */
+ 
 namespace barneyk\migration\controllers;
 
 use Yii;
 use yii\console\controllers\MigrateController as OriginalController;
 use yii\base\Controller as BaseController;
 
+/**
+ * @author Barney K <info@barney-k.com>
+ */
 
 class MigrateController extends OriginalController
 {
@@ -18,11 +28,10 @@ class MigrateController extends OriginalController
     const FG_CYAN   = 36;
     const FG_GREY   = 37;
 	
-	
+	/** @inheritdoc */
 	public function runAction($id, $consoleParams = [], $params = [])
     {
         if (!empty($consoleParams)) {
-            // populate options here so that they are available in beforeAction().
             $options = $this->options($id);
             foreach ($consoleParams as $name => $value) {
                 if (in_array($name, $options, true)) {
@@ -37,6 +46,9 @@ class MigrateController extends OriginalController
         return BaseController::runAction($id, $params);
     }
 	
+	/**
+     * Applies the given migration.
+     */
 	public function actionApply($version){
         if ($this->confirm('Apply '. $version . 'migration?')){
 			if (!$this->migrateUp($version)) {
@@ -48,6 +60,9 @@ class MigrateController extends OriginalController
         }
     }
 	
+	/**
+     * Reverts the given migration.
+     */
 	public function actionRevert($version){
         if ($this->confirm('Revert '. $version . 'migration?')){
 			if (!$this->migrateDown($version)) {
@@ -59,6 +74,9 @@ class MigrateController extends OriginalController
         }
     }
 	
+	/**
+     * Marks the given migration as done.
+     */
 	public function actionMark($version){
         if ($this->confirm("Set migration history for $version?")){
 			$this->addMigrationHistory($version);
@@ -66,6 +84,9 @@ class MigrateController extends OriginalController
         }
     }
 	
+	/**
+     * Marks the given migration as undone.
+     */
 	public function actionMarkDown($version){
         if ($this->confirm("Remove migration history for $version?")){
 			$this->removeMigrationHistory($version);
@@ -73,6 +94,9 @@ class MigrateController extends OriginalController
         }
     }
 	
+	/**
+     * Redos the given migration.
+     */
 	public function actionRedo($version)
     {
          if ($this->confirm("Redo migration for $version?")) {
@@ -92,6 +116,7 @@ class MigrateController extends OriginalController
         }
     }
 	
+	/** @inheritdoc */
 	public function confirm($message, $default = false)
     {
 		$this->stdout($message);
@@ -99,6 +124,11 @@ class MigrateController extends OriginalController
 		return parent::confirm($message, $default);
     }
 	
+	/**
+     * Overrides the parent's console stdout function.
+	 * Generates the messages with colors to a session variable.
+	 * @return boolean
+     */
 	public function stdout($string,$color = 0)
     {
         $stdout = Yii::$app->session->get('migrate_stdout','');
@@ -113,6 +143,10 @@ class MigrateController extends OriginalController
 		return true;
     }
 	
+	/**
+     * Returns a color that can be added to a CSS "color" attribute.
+	 * @return string
+     */
 	function getColorNameById($id){
 		$array = [
 			self::FG_WHITE => 'white',
