@@ -27,6 +27,12 @@ And run following command to download extension using **composer**:
 $ php composer.phar update
 ```
 
+OR
+
+```bash
+$ php composer.phar require barney-k/yii2-migration-module "dev-master"
+```
+
 Step 2: Configure your application
 ----------------------------------
 
