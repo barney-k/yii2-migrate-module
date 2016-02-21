@@ -1,0 +1,12 @@
+{
+    "name": "barney-k/yii2-migration-module",
+    "description": "Yii2 module for managing migrations",
+    "authors": [
+        {
+            "name": "Barney K",
+            "email": "info@barney-k.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
